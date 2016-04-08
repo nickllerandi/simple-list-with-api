@@ -40,14 +40,13 @@ app.post('/items', jsonParser, function(req, res) {
     res.status(201).json(item);
 });
 
-////Part 1 - adding a DELETE endpoint
-////To complete this section of the assignment you should create a DELETE endpoint for /items/<id>. For example, making a delete request to /items/3 would delete the item with ID 3.
-////
-////Requirements
-////
-////If successful, your endpoint should return the deleted item, with the appropriate status code.
-////If an incorrect ID is supplied, your endpoint should fail gracefully, returning a JSON error message.
-//
+
+
+
+
+
+
+//I want to be able to remove items by making a delete request that corresponds to the item's id. Any ideas?
 
 //app.del('/items/:id', jsonParser, function (req, res) {
 //    var id = req.params.id;
