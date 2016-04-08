@@ -16,8 +16,8 @@ Storage.prototype.add = function(name) {
 };
 
 var storage = new Storage();
-storage.add('Broad beans');
-storage.add('Tomatoes');
+storage.add('Milk');
+storage.add('Cereal');
 storage.add('Peppers');
 
 var app = express();
