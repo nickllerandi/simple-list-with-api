@@ -46,7 +46,7 @@ app.post('/items', jsonParser, function(req, res) {
 
 
 
-//I want to be able to remove items by making a delete request that corresponds to the item's id. Any ideas??
+//I want to be able to remove items by making a delete request that corresponds to the item's id. Any ideas?
 
 //app.del('/items/:id', jsonParser, function (req, res) {
 //    var id = req.params.id;
