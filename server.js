@@ -15,6 +15,17 @@ Storage.prototype.add = function(name) {
     return item;
 };
 
+Storage.prototype.remove = function(id) {
+	console.log(id, 'id');
+	console.log(this.items, 'items');
+    var n = this.items.indexOf(id);
+    console.log(n);
+	return this.items.splice(n, 1);
+	
+	//needs filter function or indexof
+	
+};
+
 var storage = new Storage();
 storage.add('Milk');
 storage.add('Cereal');
@@ -40,24 +51,15 @@ app.post('/items', jsonParser, function(req, res) {
     res.status(201).json(item);
 });
 
-
-
-
-
-
-
-//I want to be able to remove items by making a delete request that corresponds to the item's id. Any ideas?
-
-//app.del('/items/:id', jsonParser, function (req, res) {
-//    var id = req.params.id;
-//    res.send(id);
-//});
-
-
-
-
+app.delete('/items/:id', function (req, res) {
+    var id = req.params.id;
+	var result = storage.remove(id);
+	console.log(result, 'result');
+    res.send(result);
+});
 
 //test urls ------------------------------------------------------------------------
+
 var router = require('./router.js');
 app.get('/items/test', function(req, res) {
    router.test(req, res); 
