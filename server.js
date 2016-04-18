@@ -16,14 +16,16 @@ Storage.prototype.add = function(name) {
 };
 
 Storage.prototype.remove = function(id) {
-	console.log(id, 'id');
-	console.log(this.items, 'items');
-    var n = this.items.indexOf(id);
-    console.log(n);
-	return this.items.splice(n, 1);
-	
-	//needs filter function or indexof
-	
+    console.log('1. items: ', this.items);
+	console.log('2. id: ', id);
+    
+    for (i = 0; i < this.items.length; i++) {
+        if (this.items[i].id === id) {
+        console.log('3. index: ', i);
+        return i;
+    }
+}
+    return this.items.splice(i, 1);
 };
 
 var storage = new Storage();
