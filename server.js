@@ -15,17 +15,19 @@ Storage.prototype.add = function(name) {
     return item;
 };
 
-Storage.prototype.remove = function(id) {
-    console.log('1. items: ', this.items);
-	console.log('2. id: ', id);
-    
-    for (i = 0; i < this.items.length; i++) {
-        if (this.items[i].id === id) {
-        console.log('3. index: ', i);
-        return i;
+Storage.prototype.remove = function(itemId) {
+    console.log('passed in: ' + itemId);
+    console.log(this.items, 'items');
+    console.log("Total array length: " + this.items.length);
+    for(i = 0; i < this.items.length; i++) {
+        console.log("This item's id: " + this.items[i].id );
+        if(this.items[i].id == itemId) {            
+            var deleteMe = this.items[i];
+            var index = this.items.indexOf(deleteMe);
+            return this.items.splice(index, 1);
+        } 
     }
-}
-    return this.items.splice(i, 1);
+    return "Error: Item not found.";
 };
 
 var storage = new Storage();
@@ -70,5 +72,9 @@ app.get('/items/test', function(req, res) {
 app.get('/items/anothertest', function(req, res) {
    router.anotherTest(req, res); 
 });
+//-------------------------------------------------------------------------------------
+
+exports.app = app;
+exports.storage = storage;
 
 app.listen(process.env.PORT || 8080);
