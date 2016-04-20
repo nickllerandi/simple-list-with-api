@@ -16,14 +16,10 @@ Storage.prototype.add = function(name) {
 };
 
 Storage.prototype.remove = function(itemId) {
-    console.log('passed in: ' + itemId);
-    console.log(this.items, 'items');
-    console.log("Total array length: " + this.items.length);
-    for(i = 0; i < this.items.length; i++) {
-        console.log("This item's id: " + this.items[i].id );
-        if(this.items[i].id == itemId) {            
-            var deleteMe = this.items[i];
-            var index = this.items.indexOf(deleteMe);
+	for(i = 0; i < this.items.length; i++) {
+		if(this.items[i].id == itemId) {            
+//            var deleteMe = this.items[i];
+            var index = this.items.indexOf(this.items[i]);
             return this.items.splice(index, 1);
         } 
     }
@@ -58,9 +54,17 @@ app.post('/items', jsonParser, function(req, res) {
 app.delete('/items/:id', function (req, res) {
     var id = req.params.id;
 	var result = storage.remove(id);
-	console.log(result, 'result');
     res.send(result);
 });
+
+app.put('/items/:id', function (req, res) {
+	var id = req.params.id;
+	var name = req.params.name;
+	console.log(id);
+	console.log(name);
+	var result = storage.update(id);
+	res.send(result);
+})
 
 //test urls ------------------------------------------------------------------------
 
