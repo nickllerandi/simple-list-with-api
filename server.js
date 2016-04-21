@@ -15,15 +15,31 @@ Storage.prototype.add = function(name) {
     return item;
 };
 
-Storage.prototype.remove = function(itemId) {
+Storage.prototype.remove = function(id) {
 	for(i = 0; i < this.items.length; i++) {
-		if(this.items[i].id == itemId) {            
-//            var deleteMe = this.items[i];
+		if(this.items[i].id == id) {            
             var index = this.items.indexOf(this.items[i]);
             return this.items.splice(index, 1);
         } 
     }
-    return "Error: Item not found.";
+};
+
+Storage.prototype.update = function(name, id) {
+	for(i = 0; i < this.items.length; i++) {
+		if(this.items[i].id == id) {
+			this.items[i].name = name;
+			return this.items[i];
+		}
+	}
+	
+//	var result = this.items.filter(function(value) {
+//		console.log(value);
+//		return value.id === id;
+//	}).shift();
+//	result.name = name;
+//	console.log(result);
+//	return result;
+	
 };
 
 var storage = new Storage();
@@ -40,9 +56,9 @@ app.get('/items', function(req, res) {
 });
 
 var bodyParser = require('body-parser');
-var jsonParser = bodyParser.json();
+app.use(bodyParser.json());
 
-app.post('/items', jsonParser, function(req, res) {
+app.post('/items', function(req, res) {
     if (!req.body) {
         return res.sendStatus(400);
     }
@@ -58,13 +74,12 @@ app.delete('/items/:id', function (req, res) {
 });
 
 app.put('/items/:id', function (req, res) {
-	var id = req.params.id;
-	var name = req.params.name;
-	console.log(id);
-	console.log(name);
-	var result = storage.update(id);
+	console.log(req.body);
+	var id = req.body.id;
+	var name = req.body.name;
+	var result = storage.update(name, id);
 	res.send(result);
-})
+});
 
 //test urls ------------------------------------------------------------------------
 
