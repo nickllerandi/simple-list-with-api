@@ -56,10 +56,31 @@ describe('Shopping List', function() {
             });
     });
     it('should edit an item on put', function(done) {
-        chai.request(app)
-            .put('/items')
-            
+       chai.request(app)
+            .put('/items/:id')
+            .send({'name': 'Durian', 'id': 3})
+            .end(function(err, res) {
+                res.body.id.should.be.a('number');
+                res.body.name.should.be.a('string');
+                storage.items[3].should.be.a('object');
+                storage.items[3].should.have.property('id');
+                storage.items[3].should.have.property('name');
+                storage.items[3].id.should.be.a('number');
+                storage.items[3].name.should.be.a('string');
+                storage.items[3].name.should.equal('Durian');
+                done();
+            }); 
     });
-    it('should delete an item on delete');
+
+    it('should delete an item on delete', function(done) {
+        chai.request(app)
+            .delete('/items/:id')
+            .send({'id': 0})
+            .end(function(err,res) {
+                storage.items[0].should.not.equal('Milk');
+                
+                done();
+        });
+    });
 });
 

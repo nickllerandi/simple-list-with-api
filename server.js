@@ -74,7 +74,6 @@ app.delete('/items/:id', function (req, res) {
 });
 
 app.put('/items/:id', function (req, res) {
-	console.log(req.body);
 	var id = req.body.id;
 	var name = req.body.name;
 	var result = storage.update(name, id);
