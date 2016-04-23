@@ -43,9 +43,9 @@ Storage.prototype.update = function(name, id) {
 };
 
 var storage = new Storage();
-storage.add('Milk');
-storage.add('Cereal');
-storage.add('Peppers');
+//storage.add('Milk');
+//storage.add('Cereal');
+//storage.add('Peppers');
 
 var app = express();
 app.use(express.static('public'));
