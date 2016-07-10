@@ -43,9 +43,9 @@ Storage.prototype.update = function(name, id) {
 };
 
 var storage = new Storage();
-//storage.add('Milk');
-//storage.add('Cereal');
-//storage.add('Peppers');
+storage.add('Milk');
+storage.add('Cereal');
+storage.add('Peppers');
 
 var app = express();
 app.use(express.static('public'));
@@ -96,4 +96,5 @@ app.get('/items/anothertest', function(req, res) {
 exports.app = app;
 exports.storage = storage;
 
+console.log('listening on 8080');
 app.listen(process.env.PORT || 8080);
