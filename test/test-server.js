@@ -8,7 +8,7 @@ var storage = server.storage;
 
 chai.use(chaiHttp);
 
-describe('Shopping List', function() {
+describe('bestFriend List', function() {
     it('should list items on GET', function(done) {
         chai.request(app)
             .get('/items')
@@ -23,9 +23,9 @@ describe('Shopping List', function() {
                 res.body[0].should.have.property('name');
                 res.body[0].id.should.be.a('number');
                 res.body[0].name.should.be.a('string');
-                res.body[0].name.should.equal('Milk');
-                res.body[1].name.should.equal('Cereal');
-                res.body[2].name.should.equal('Peppers');
+                res.body[0].name.should.equal('billy');
+                res.body[1].name.should.equal('alan');
+                res.body[2].name.should.equal('nick');
 				storage.items.should.have.length(3);
                 done();
             });
@@ -48,7 +48,7 @@ describe('Shopping List', function() {
                 storage.items.should.be.a('array');
                 storage.items.should.have.length(4);
 //		   		Milk is at 0
-		   		storage.items[0].name.should.equal('Milk');
+		   		storage.items[0].name.should.equal('billy');
                 storage.items[3].should.be.a('object');
                 storage.items[3].should.have.property('id');
                 storage.items[3].should.have.property('name');
@@ -68,8 +68,8 @@ describe('Shopping List', function() {
 			.end(function(err, res) {
 //				Waffles is now at 0. Not Milk
 				storage.items[0].name.should.equal('Waffles');
-				storage.items[1].name.should.equal('Cereal');
-				storage.items[2].name.should.equal('Peppers');
+				storage.items[1].name.should.equal('alan');
+				storage.items[2].name.should.equal('nick');
 				storage.items[3].name.should.equal('Kale');
 				storage.items.should.have.length(4);
 				done();

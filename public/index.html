@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Shopping List</title>
+        <title>Best Friend List</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -64,7 +64,7 @@ div.delete {
         </style>
 
         <script>
-var ShoppingList = function() {
+var bestFriendList = function() {
     this.items = [];
     this.itemList = $('#item-list');
     this.itemListTemplate = Handlebars.compile($("#item-list-template").html());
@@ -81,7 +81,7 @@ var ShoppingList = function() {
                  this.onDeleteItemClicked.bind(this));
     this.getItems();
 };
-ShoppingList.prototype.onAddInputKeydown = function(event) {
+bestFriendList.prototype.onAddInputKeydown = function(event) {
     if (event.which != 13) {
         return;
     }
@@ -93,7 +93,7 @@ ShoppingList.prototype.onAddInputKeydown = function(event) {
     input.val('');
     event.preventDefault();
 };
-ShoppingList.prototype.onEditItemClicked = function(event) {
+bestFriendList.prototype.onEditItemClicked = function(event) {
     var item = $(event.target).parents('li');
     var display = item.children('.display');
     var input = item.children('input');
@@ -104,14 +104,14 @@ ShoppingList.prototype.onEditItemClicked = function(event) {
     display.hide();
     event.preventDefault();
 };
-ShoppingList.prototype.onEditInputKeydown = function(event) {
+bestFriendList.prototype.onEditInputKeydown = function(event) {
     if (event.which != 13) {
         return;
     }
     var input = $(event.target);
     input.blur();
 };
-ShoppingList.prototype.onEditFocusOut = function(event) {
+bestFriendList.prototype.onEditFocusOut = function(event) {
     var item = $(event.target).parents('li');
     var id = item.data('id');
     var display = item.children('.display');
@@ -126,20 +126,20 @@ ShoppingList.prototype.onEditFocusOut = function(event) {
     display.show();
     event.preventDefault();
 };
-ShoppingList.prototype.onDeleteItemClicked = function(event) {
+bestFriendList.prototype.onDeleteItemClicked = function(event) {
     var id = $(event.target).parents('li').data('id');
     this.deleteItem(id);
 };
-ShoppingList.prototype.getItems = function() {
-    var ajax = $.ajax('/items', {
+bestFriendList.prototype.getItems = function() {
+    var ajax = $.ajax('/jsonAPI', {
         type: 'GET',
         dataType: 'json'
     });
     ajax.done(this.onGetItemsDone.bind(this));
 };
-ShoppingList.prototype.addItem = function(name) {
+bestFriendList.prototype.addItem = function(name) {
     var item = {'name': name};
-    var ajax = $.ajax('/items', {
+    var ajax = $.ajax('/jsonAPI', {
         type: 'POST',
         data: JSON.stringify(item),
         dataType: 'json',
@@ -147,16 +147,16 @@ ShoppingList.prototype.addItem = function(name) {
     });
     ajax.done(this.getItems.bind(this));
 };
-ShoppingList.prototype.deleteItem = function(id) {
-    var ajax = $.ajax('/items/' + id, {
+bestFriendList.prototype.deleteItem = function(id) {
+    var ajax = $.ajax('/jsonAPI/' + id, {
         type: 'DELETE',
         dataType: 'json'
     });
     ajax.done(this.getItems.bind(this));
 };
-ShoppingList.prototype.editItem = function(id, name) {
+bestFriendList.prototype.editItem = function(id, name) {
     var item = {'name': name, 'id': id};
-    var ajax = $.ajax('/items/' + id, {
+    var ajax = $.ajax('/jsonAPI/' + id, {
         type: 'PUT',
         data: JSON.stringify(item),
         dataType: 'json',
@@ -164,11 +164,11 @@ ShoppingList.prototype.editItem = function(id, name) {
     });
     ajax.done(this.getItems.bind(this));
 };
-ShoppingList.prototype.onGetItemsDone = function(items) {
+bestFriendList.prototype.onGetItemsDone = function(items) {
     this.items = items;
     this.updateItemsView();
 };
-ShoppingList.prototype.updateItemsView = function() {
+bestFriendList.prototype.updateItemsView = function() {
     var context = {
         items: this.items
     };
@@ -177,13 +177,13 @@ ShoppingList.prototype.updateItemsView = function() {
     this.itemList = itemList;
 };
 $(document).ready(function() {
-    var app = new ShoppingList();
+    var app = new bestFriendList();
 });
         </script>
     </head>
     <body>
         <div id="main">
-            <h1>Shopping List</h1>
+            <h1>Super Best Friend List</h1>
             <input type="text" placeholder="Add an item" id="item-input"
                 autocomplete="off" autofocus>
             <ul id="item-list">

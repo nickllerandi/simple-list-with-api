@@ -43,37 +43,37 @@ Storage.prototype.update = function(name, id) {
 };
 
 var storage = new Storage();
-storage.add('Milk');
-storage.add('Cereal');
-storage.add('Peppers');
+storage.add('billy');
+storage.add('alan');
+storage.add('nick');
 
 var app = express();
 app.use(express.static('public'));
 
 
-app.get('/items', function(req, res) {
+app.get('/jsonAPI', function(req, res) {
     res.json(storage.items);
 });
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
-app.post('/items', function(req, res) {
+app.post('/jsonAPI', function(req, res) {
     if (!req.body) {
-        return res.sendStatus(400);
+        return res.sendstatus(400);
     }
 
     var item = storage.add(req.body.name);
     res.status(201).json(item);
 });
 
-app.delete('/items/:id', function (req, res) {
+app.delete('/jsonAPI/:id', function (req, res) {
     var id = req.params.id;
 	var result = storage.remove(id);
     res.send(result);
 });
 
-app.put('/items/:id', function (req, res) {
+app.put('/jsonAPI/:id', function (req, res) {
 	console.log(req.body);
 	var id = req.body.id;
 	var name = req.body.name;

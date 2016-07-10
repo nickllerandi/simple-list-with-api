@@ -1,1 +1,1 @@
-# persistent-shopping-list
+# persistent-bestFriend-list
